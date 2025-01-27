@@ -1,0 +1,120 @@
+// src/Chatbot.js
+import React, { useState } from "react";
+import star from "../assets/images/star.png";
+import send from "../assets/images/send.png";
+import user from "../assets/images/user.png";
+import attachment from "../assets/images/attachment.png";
+import loadingImage from "../assets/images/loadingImage.png";
+import rightArrow from "../assets/images/rightArrow.png";
+import "./ChatBotModal.css";
+import MessageBox from "./MessageBox";
+import ImageComponent from "./ImageComponent";
+import MessageUser from "./MessageUser";
+import FaqComponent from "./FaqComponent";
+import { Frame29 } from "../Pages/Frame29/Frame29";
+import { Frame31 } from "../Pages/Frame31/Frame31";
+import { CardChat } from "./CardChat/CardChat";
+import { CardData, CardDataBottm } from "../utils/data";
+import Frame38 from "./frame38/Frame38";
+import Frame14 from "./frame14/Frame14";
+import Frame15 from "./frame15/Frame15";
+import Frame18 from "./frame18/Frame18";
+import { Frame32 } from "../Pages/Frame32/Frame32";
+import Frame16 from "./frame16/Frame16";
+
+const ChatBotModal = ({ modalOpen, closeModal }) => {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState("");
+
+  // Function to handle sending a message
+  const handleSendMessage = () => {
+    if (input.trim()) {
+      // Add user message
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: input, sender: "user" },
+      ]);
+
+      // Simple bot response
+      setTimeout(() => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "Hello! How can I help you?", sender: "bot" },
+        ]);
+      }, 1000);
+
+      setInput("");
+    }
+  };
+
+  return (
+    // The modal is conditionally rendered based on modalOpen
+    modalOpen && (
+      <div className="chatbot-container">
+        <div className="flex items-center gap-3 mb-3">
+          <img
+            src={star}
+            alt="arrow down"
+            className="w-16 h-full cursor-pointer"
+          />
+          <div>
+            <p className="font-medium text-xl">MSI AI Assistant</p>
+            <p className="text-[#727681]">We are online to assist you</p>
+          </div>
+        </div>
+
+        <div className="relative bg-[#F7F8F9] rounded-[18px]  h-[559px]">
+          <div className="chat-box overflow-y-scroll h-[493px]">
+            <div className=" rounded-[18px] p-[15px]">
+              {/* <Frame38 /> */}
+              <div className="relative bg-[#F7F8F9]  h-full">
+                <div className="chat-box">
+                  <div className="relative bg-[#F7F8F9]  h-full">
+                    <div className="chat-box">
+                      {/* <Frame14 /> */}
+                      {/* <Frame15 /> */}
+                      {/* <Frame18 /> */}
+                    </div>
+                  </div>
+                </div>
+                <div className="relative bg-[#F7F8F9]  h-full">
+                  <div className="chat-box">
+                    <div className="mb-5">{/* <Frame29 /> */}</div>
+
+                    {/* <Frame18 /> */}
+                    <div className="mt-8">{/* <Frame16  /> */}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center input-container absolute bottom-4 w-[656px] h-[56px] rounded- [12px] border  ">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                  placeholder="Write a message..."
+                />
+
+                <div className="flex">
+                  <img
+                    src={attachment}
+                    alt="dsfdfd"
+                    className="w-[34px] h-[34px] cursor-pointer"
+                  />
+                  <img
+                    src={send}
+                    alt="hfdgfv"
+                    className="w-[40px] h-[40px] cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  );
+};
+
+export default ChatBotModal;
